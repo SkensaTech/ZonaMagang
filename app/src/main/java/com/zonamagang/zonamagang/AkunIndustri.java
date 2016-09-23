@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
+import com.squareup.picasso.Picasso;
 import com.zonamagang.zonamagang.Model.tb_industri;
 
 import org.w3c.dom.Text;
@@ -41,6 +43,7 @@ public class AkunIndustri extends AppCompatActivity {
     TextView profil_industri;
     TextView deskripsi_industri;
     TextView kemampuan_industri;
+    ImageView img;
 
     String namaIndustri,jalanIndustri,emailIndustri,
             noTelpIndustri,profilIndustri,
@@ -54,7 +57,6 @@ public class AkunIndustri extends AppCompatActivity {
         setContentView(R.layout.activity_akun_industri);
         String x = getIntent().getStringExtra("id_user");
         int id_industri = MainActivity.id_login;
-        Toast.makeText(AkunIndustri.this, ""+id_industri, Toast.LENGTH_SHORT).show();
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -72,6 +74,8 @@ public class AkunIndustri extends AppCompatActivity {
                 profil_industri.setText(curpage.get(0).getProfil());
                 deskripsi_industri.setText(curpage.get(0).getJobdesc());
                 kemampuan_industri.setText(curpage.get(0).getKualifikasi());
+                String xxx = curpage.get(0).getLogo();
+                Picasso.with(AkunIndustri.this).load(xxx).into(img);
             }
 
             @Override
@@ -109,5 +113,6 @@ public class AkunIndustri extends AppCompatActivity {
         profil_industri = (TextView) findViewById(R.id.profile_industri);
         deskripsi_industri = (TextView) findViewById(R.id.deskripsi_industri);
         kemampuan_industri = (TextView) findViewById(R.id.kemampuan_industri);
+        img = (ImageView) findViewById(R.id.logo);
     }
 }
