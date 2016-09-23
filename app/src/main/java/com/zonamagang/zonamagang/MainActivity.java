@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     int id_siswa;
     Context context = this;
     boolean doubleBackToExit = false;
-
+    public static int id_login;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -85,12 +85,15 @@ public class MainActivity extends AppCompatActivity {
                                         tb_industri industriInfo = iterator.next();
                                         nama = industriInfo.getNama();
                                         logo = industriInfo.getLogo();
-
+                                        id_login = industriInfo.getId_industri();
                                         Intent homeIndustri = new Intent(MainActivity.this, HomeIndustri.class);
                                         homeIndustri.putExtra("email", email);
                                         homeIndustri.putExtra("nama", nama);
                                         homeIndustri.putExtra("logo", logo);
+//                                        homeIndustri.putExtra("id_user",industri_id);
+//                                        Toast.makeText(MainActivity.this, ""+industri_id, Toast.LENGTH_SHORT).show();
                                         startActivity(homeIndustri);
+
                                     }
                                 }
 

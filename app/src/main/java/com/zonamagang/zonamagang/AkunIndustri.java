@@ -8,9 +8,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.backendless.Backendless;
+import com.backendless.BackendlessCollection;
 import com.backendless.BackendlessUser;
+import com.backendless.async.callback.AsyncCallback;
+import com.backendless.exceptions.BackendlessFault;
+import com.backendless.persistence.BackendlessDataQuery;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -20,19 +25,22 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
+import com.zonamagang.zonamagang.Model.tb_industri;
 
 import org.w3c.dom.Text;
+
+import java.util.List;
 
 public class AkunIndustri extends AppCompatActivity {
 
     private Drawer result = null;
-    private TextView nama_industri;
-    private TextView jalan_industri;
-    private TextView email_industri;
-    private TextView noTelp_industri;
-    private TextView profil_industri;
-    private TextView deskripsi_industri;
-    private TextView kemampuan_industri;
+    TextView nama_industri;
+    TextView jalan_industri;
+    TextView email_industri;
+    TextView noTelp_industri;
+    TextView profil_industri;
+    TextView deskripsi_industri;
+    TextView kemampuan_industri;
 
     String namaIndustri,jalanIndustri,emailIndustri,
             noTelpIndustri,profilIndustri,
@@ -44,78 +52,35 @@ public class AkunIndustri extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_akun_industri);
-
-        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar)findViewById(R.id.toolbar);
+        String x = getIntent().getStringExtra("id_user");
+        int id_industri = MainActivity.id_login;
+        Toast.makeText(AkunIndustri.this, ""+id_industri, Toast.LENGTH_SHORT).show();
+        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        String whereClause = "id_industri = "+id_industri;
+        BackendlessDataQuery query = new BackendlessDataQuery();
+        query.setWhereClause(whereClause);
+        Backendless.Persistence.of(tb_industri.class).find(query, new AsyncCallback<BackendlessCollection<tb_industri>>() {
+            @Override
+            public void handleResponse(BackendlessCollection<tb_industri> dataIndustri) {
+                List<tb_industri> curpage = dataIndustri.getCurrentPage();
+                nama_industri.setText(curpage.get(0).getNama());
+                jalan_industri.setText(curpage.get(0).getAlamat());
+                email_industri.setText(curpage.get(0).getEmail());
+                noTelp_industri.setText(curpage.get(0).getNo_telp());
+                profil_industri.setText(curpage.get(0).getProfil());
+                deskripsi_industri.setText(curpage.get(0).getJobdesc());
+                kemampuan_industri.setText(curpage.get(0).getKualifikasi());
+            }
 
-        final PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName("Beranda");
-        final PrimaryDrawerItem item2 = new PrimaryDrawerItem().withIdentifier(2).withName("Notifikasi");
-        final PrimaryDrawerItem item3 = new PrimaryDrawerItem().withIdentifier(3).withName("Akun Saya");
-        final PrimaryDrawerItem item4 = new PrimaryDrawerItem().withIdentifier(4).withName("Tentang Kami");
-        final PrimaryDrawerItem item5 = new PrimaryDrawerItem().withIdentifier(5).withName("Keluar");
+            @Override
+            public void handleFault(BackendlessFault fault) {
 
-        AccountHeader headerProfile = new AccountHeaderBuilder()
-                .withActivity(this)
-                .withHeaderBackground(R.drawable.bg)
-                .addProfiles(
-                        new ProfileDrawerItem()
-                                .withName("Denandra Prasetya")
-                                .withEmail("denandra1628@gmail.com")
-                                .withIcon(getResources().getDrawable(R.drawable.asu))
-                )
-                .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
-                    @Override
-                    public boolean onProfileChanged(View view, IProfile profile, boolean current) {
-                        return false;
-                    }
-                })
-                .build();
-
-        result = new DrawerBuilder()
-                .withAccountHeader(headerProfile)
-                .withActivity(this)
-                .addDrawerItems(
-                        item1,
-                        new DividerDrawerItem(),
-                        item2,
-                        new DividerDrawerItem(),
-                        item3,
-                        new DividerDrawerItem(),
-                        item4,
-                        new DividerDrawerItem(),
-                        item5,
-                        new DividerDrawerItem()
-                )
-                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
-                    @Override
-                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                        if (position == 1){
-                            Intent intent = new Intent(AkunIndustri.this,HomeIndustri.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                        else if (drawerItem.getIdentifier() == 2){
-                            Intent itent = new Intent(AkunIndustri.this,Notifikasi_Industri.class);
-                            startActivity(itent);
-                            finish();
-                        }
-                        else if (drawerItem.getIdentifier() == 3){
-                            Intent intent = new Intent(AkunIndustri.this,AkunIndustri.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                        else if (drawerItem.getIdentifier() == 4){
-                            Intent intent = new Intent(AkunIndustri.this,TentangKami.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                        return false;
-                    }
-                })
-                .build();
+            }
+        });
+        this.layoutitem();
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
@@ -134,5 +99,15 @@ public class AkunIndustri extends AppCompatActivity {
                 startActivity(intent);
         }
         return super.onContextItemSelected(item);
+    }
+
+    public void layoutitem(){
+        nama_industri = (TextView) findViewById(R.id.nama);
+        jalan_industri = (TextView) findViewById(R.id.alamat);
+        email_industri = (TextView) findViewById(R.id.email_industri) ;
+        noTelp_industri = (TextView) findViewById(R.id.noTelp_industri);
+        profil_industri = (TextView) findViewById(R.id.profile_industri);
+        deskripsi_industri = (TextView) findViewById(R.id.deskripsi_industri);
+        kemampuan_industri = (TextView) findViewById(R.id.kemampuan_industri);
     }
 }

@@ -79,7 +79,8 @@ public class HomeIndustri extends AppCompatActivity {
         email = getIntent().getStringExtra("email");
         nama = getIntent().getStringExtra("nama");
         logo = getIntent().getStringExtra("logo");
-
+        String a = getIntent().getStringExtra("id_user");
+//        id_user = Integer.parseInt(a);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         viewPager = (ViewPager) findViewById(R.id.viewpager);
 
@@ -171,6 +172,7 @@ public class HomeIndustri extends AppCompatActivity {
                         }
                         else if (drawerItem.getIdentifier() == 3){
                             Intent intent = new Intent(HomeIndustri.this,AkunIndustri.class);
+                            intent.putExtra("id_user",id_user);
                             startActivity(intent);
                         }
                         else if (drawerItem.getIdentifier() == 4){

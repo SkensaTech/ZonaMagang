@@ -53,10 +53,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="PT. Bamboo Media"
+                        tools:text="PT. Bamboo Media"
                         android:textStyle="bold"
                         android:textColor="#FEFEFE"
-                        android:id="@+id/detail_industri_nama" />
+                        android:id="@+id/nama" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -64,9 +64,9 @@
                         android:layout_marginTop="2dp"
                         android:textColor="#FEFEFE"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Jl Hayam Wuruk no 69 Denpasar"
+                        tools:text="Jl Hayam Wuruk no 69 Denpasar"
                         android:textSize="14sp"
-                        android:id="@+id/textView7" />
+                        android:id="@+id/alamat" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -102,7 +102,7 @@
                         android:layout_marginTop="32dp"
                         android:padding="12dp"
                         android:id="@+id/email_industri"
-                        android:text="info@bamboomedia.com"
+                        tools:text="info@bamboomedia.com"
                         android:textSize="16sp" />
                 </android.support.v7.widget.CardView>
 
@@ -126,7 +126,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="32dp"
                         android:padding="12dp"
-                        android:text="0361 - 14045"
+                        tools:text="0361 - 14045"
                         android:id="@+id/noTelp_industri"
                         android:textSize="16sp" />
                 </android.support.v7.widget.CardView>
@@ -151,7 +151,7 @@
                         android:layout_marginTop="32dp"
                         android:padding="12dp"
                         android:id="@+id/profile_industri"
-                        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque egestas malesuada hendrerit. Fusce in bibendum arcu. Phasellus sed enim arcu. Nullam sit amet gravida sem, vitae condimentum felis. Ut sodales metus at tellus rhoncus, in volutpat tellus imperdiet. Etiam vitae diam vitae nisl cursus accumsan."
+                        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque egestas malesuada hendrerit. Fusce in bibendum arcu. Phasellus sed enim arcu. Nullam sit amet gravida sem, vitae condimentum felis. Ut sodales metus at tellus rhoncus, in volutpat tellus imperdiet. Etiam vitae diam vitae nisl cursus accumsan."
                         android:textSize="16sp"
                         />
                 </android.support.v7.widget.CardView>
@@ -176,7 +176,7 @@
                         android:layout_marginTop="32dp"
                         android:padding="12dp"
                         android:id="@+id/deskripsi_industri"
-                        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. \n Pellentesque egestas malesuada hendrerit.\n Fusce in bibendum arcu. "
+                        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. \n Pellentesque egestas malesuada hendrerit.\n Fusce in bibendum arcu. "
                         android:textSize="16sp"
                         />
                 </android.support.v7.widget.CardView>
@@ -201,7 +201,7 @@
                         android:id="@+id/kemampuan_industri"
                         android:layout_marginTop="32dp"
                         android:padding="12dp"
-                        android:text="Lorem ipsum dolor sit amet : PHP \n HTML \n CSS \ Java"
+                        tools:text="Lorem ipsum dolor sit amet : PHP \n HTML \n CSS \ Java"
                         android:textSize="16sp"
                         />
                 </android.support.v7.widget.CardView>
